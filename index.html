@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zakrenz Modder</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Inline Animation Style -->
+  <style>
+    .fade {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.5s ease;
+    }
+
+    .fade.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .clickable-icon {
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .clickable-icon:active {
+      transform: scale(0.92);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Home Page -->
+  <div class="container show" id="home-page">
+    <div class="profile-container">
+      <div class="spinner-wrapper">
+        <div class="spinner-circle"></div>
+      </div>
+      <a href="https://chat.whatsapp.com/IwDy9GyuUeQEPE11yaCqN6?mode=r_t" target="_blank">
+        <img src="icon.png" alt="Profile" class="profile-img clickable-icon" />
+      </a>
+    </div>
+
+<div class="spinner-ring">
+  <span style="animation-delay: 0s;"></span>
+  <span style="animation-delay: 0.15s;"></span>
+  <span style="animation-delay: 0.3s;"></span>
+  <span style="animation-delay: 0.45s;"></span>
+</div>
+
+<!-- Info Icon Button -->
+<div class="info-button" onclick="showInfoDialog()">
+  <i class="fas fa-circle-exclamation"></i>
+</div>
+
+<!-- Music Icon Button (di kanan info-button) -->
+<div class="info-button icon-music" onclick="showMusicDialog()">
+  <i class="fas fa-music"></i>
+</div>
+
+<!-- Theme Toggle Button (sebelah kanan musik) -->
+<div class="info-button icon-theme" onclick="toggleTheme()">
+  <i class="fas fa-lightbulb"></i>
+</div>
+
+<!-- AI Ruan Mei Icon Button -->
+<div class="info-button icon-ai" onclick="showPage('ai-page')">
+  <i class="fas fa-robot"></i>
+</div>
+
+<!-- Alert Dialog Modal -->
+<div id="info-dialog" class="dialog-box hidden">
+  <div class="dialog-content animate-slide">
+    <h3><i class="fas fa-info-circle"></i> Information</h3>
+    <p>Website ini dibuat oleh <b>Zakrenz Modder</b> untuk keperluan edukasi, showcase, dan website project personal.</p>
+    <p style="margin-top: 1rem;">Untuk informasi lebih lanjut, hubungi via WhatsApp atau gabung ke grup WhatsApp kami. Klik profil saya untuk bergabung ke dalam grup WhatsApp kami.</p>
+    <button onclick="closeInfoDialog()">Oke, Mengerti</button>
+  </div>
+</div>
+
+<!-- Audio Control Box -->
+<div id="music-dialog" class="dialog-box hidden">
+  <div class="dialog-content animate-slide">
+    <h3><i class="fas fa-music"></i> Kontrol Musik</h3>
+    <p>Kamu bisa memainkan atau menghentikan musik latar dari sini.</p>
+    <button onclick="toggleMusic()" id="music-btn">
+      <i id="music-icon" class="fas fa-play"></i> Putar Musik
+    </button>
+    <button onclick="closeMusicDialog()">Tutup</button>
+  </div>
+</div>
+
+<!-- Audio Element -->
+<audio id="background-music" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+    <h1>Zakrenz Modder</h1>
+    <div class="typing-text" id="typing"></div>
+
+    <div class="section-title">My About</div>
+    <div class="section-content">
+      Hallo saya adalah seorang reverse engineering dan saya suka memodifikasi atau membypass hampir semua aplikasi premium...
+    </div>
+
+    <div class="section-title">The Quoted</div>
+    <div class="section-content">“Wisdom is better than gold”<br><i>Kebijaksanaan lebih baik dari emas</i></div>
+
+    <button class="next-button" onclick="showPage('stalker-page')">
+      <i class="fas fa-user-secret"></i> Stalker
+    </button>
+    <button class="next-button" onclick="showPage('more-page')">
+      <i class="fas fa-ellipsis-v"></i> Lainnya
+    </button>
+
+    <div class="footer">&copy; Create By Zakrenz Modder | C - 999</div>
+  </div>
+
+
+<!-- 📍 TikTok & YouTube Stalker Full Code by Zakrenz -->
+<div class="container hidden fade" id="stalker-page">
+  <h1>Stalker Tool</h1>
+  <div class="section-content">Cari informasi melalui data akun TikTok atau YouTube dengan mengetikkan username-nya ( tanpa menggunakan @ )</div>  
+  <div class="chat-input-wrapper">
+    <input type="text" id="stalker-input" placeholder="Contoh: zakrenzreal atau zakrenzdev">
+      </div>
+    <button class="next-button" onclick="fetchTiktokStalker()">
+      <i class="fab fa-tiktok"></i> TikTok
+    </button>
+    <button class="next-button" onclick="fetchYoutubeStalker()">
+      <i class="fab fa-youtube"></i> YouTube
+    </button>
+   <!-- Spinner -->  
+  <div class="spinner-ring hidden" id="stalker-spinner">
+    <span></span><span></span><span></span><span></span>
+  </div> 
+   <!-- Hasil --> 
+    <div class="download-result hidden" id="stalker-result"></div> 
+     <button class="back-button" onclick="showPage('home-page')">
+    <i class="fas fa-chevron-left"></i> Kembali ke Beranda
+  </button>
+  <div class="footer">&copy; Create By Zakrenz Modder | C - 999</div>
+</div>
+
+  <!-- More Page -->
+  <div class="container hidden fade" id="more-page">
+    <h1>Lainnya</h1>
+    <div class="zakrenzicon"> <img src="iconx.png" /> </div>
+    <div class="section-content">Informasi tambahan seperti tools, sosial, dan kontak developer. Jika anda menemukan sesuatu yang error atau api kami tidak merespon, silahkan hubungi kami dibawah ini.</div>
+    <div class="section-title">My Socials</div>
+    <div class="LinksX">
+      <a href="https://wa.me/message/Q3K2CFUWXJETA1" target="_blank">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="https://youtube.com/@zakrenzdev" target="_blank">
+        <i class="fab fa-youtube"></i> YouTube
+      </a>
+      <a href="https://tiktok.com/@zakrenzreal" target="_blank">
+        <i class="fab fa-tiktok"></i> TikTok
+      </a>
+      <a href="https://t.me/Zakrenz" target="_blank">
+        <i class="fab fa-telegram"></i> Telegram
+      </a>
+    </div>
+
+<div class="spinner-ring">
+  <span style="animation-delay: 0s;"></span>
+  <span style="animation-delay: 0.15s;"></span>
+  <span style="animation-delay: 0.3s;"></span>
+  <span style="animation-delay: 0.45s;"></span>
+</div>
+  
+<!-- YOUTUBE DOWNLOADER -->
+<div class="downloader-box">
+  <label for="yt-url">Downloader YouTube</label>
+  <div class="url-input-wrapper">
+    <input
+      type="text"
+      id="yt-url"
+      placeholder="[ ⟡ ] Please enter your YouTube url.."
+    />
+  </div>
+
+  <label for="type-select">Enter Type Format Download</label>
+  <select id="type-select">
+    <option value="mp3">[ 𖤝 ] YT AUDIO | MP3</option>
+    <option value="mp4">[ 𖤝 ] YT VIDEO | MP4</option>
+  </select>
+
+  <div class="progress-bar hidden" id="progressBar"></div>
+
+  <button onclick="startDownload()"> <i class="fas fa-download"></i> Download</button>
+  <div id="download-result" class="download-result hidden"></div>
+</div>
+
+<!-- TIKTOK DOWNLOADER -->
+<div class="downloader-box">
+  <label for="tiktok-url">Downloader TikTok</label>
+  <div class="url-input-wrapper">
+    <input
+      type="text"
+      id="tiktok-url"
+      placeholder="[ ⟡ ] Please enter your TikTok url.."
+    />
+  </div>
+
+  <label for="tiktok-type">Enter Type Format Download</label>
+  <select id="tiktok-type">
+    <option value="slide">[ 𖤝 ] TT SLIDE | IMG | FOTO</option>
+    <option value="mp4">[ 𖤝 ] TT VIDEO | MP4</option>
+    <option value="mp3">[ 𖤝 ] TT AUDIO | MP3</option>
+  </select>
+
+  <div class="progress-bar hidden" id="tiktokProgressBar"></div>
+
+  <button onclick="startTiktokDownload()">
+    <i class="fas fa-download"></i> Download
+  </button>
+
+  <div id="tiktok-download-result" class="download-result hidden"></div>
+</div>
+
+<button class="next-button" onclick="showPage('home-page')">
+  <i class="fas fa-chevron-left"></i> Kembali Ke Beranda
+</button>
+<div class="footer">&copy; Create By Zakrenz Modder | C - 999</div>
+</div>
+
+<!-- AI Chat Page: Ruan Mei -->
+<div class="container hidden fade" id="ai-page">
+  <!-- Judul -->
+  <h1>Ruan Mei AI Assistant</h1>
+
+  <!-- Deskripsi -->
+  <div class="section-content">
+    Tanyakan apa saja ke Ruan Mei. Dia pintar, sopan, dan siap membantu kamu setiap saat ✨
+  </div>
+
+  <!-- Spinner Ring (Loading efek) -->
+  <div class="spinner-ring">
+    <span style="animation-delay: 0s;"></span>
+    <span style="animation-delay: 0.15s;"></span>
+    <span style="animation-delay: 0.3s;"></span>
+    <span style="animation-delay: 0.45s;"></span>
+  </div>
+
+  <!-- Chat Box -->
+  <div class="chat-box" id="chat-box">
+    <!-- Welcome Message -->
+    <div class="ai-message-wrapper fade-slide">
+      <img src="icon.png" class="ai-icon-img" alt="Ruan Mei">
+      <div class="ai-message">
+        Hai kak~ aku adalah Ruan Mei. Aku siap membantu pertanyaan kamu hari ini, yaa ✨
+      </div>
+    </div>
+  </div>
+
+  <!-- Input & Kirim -->
+
+<div class="chat-input-wrapper">
+  <input type="text" id="ai-input" placeholder="Tulis pertanyaanmu di sini..." onkeydown="if(event.key==='Enter')sendRuanMeiMessage()">
+  <button class="chat-input-wrapper2" onclick="sendRuanMeiMessage()">
+    <i class="fas fa-paper-plane"></i>
+  </button>
+</div>
+
+  <!-- Tombol Kembali -->
+  <button class="next-button" onclick="showPage('home-page')">
+    <i class="fas fa-chevron-left"></i> Kembali ke Beranda
+  </button>
+<div class="footer">&copy; Create By Zakrenz Modder | C - 999</div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    const typing = document.getElementById("typing");
+    const texts = [
+      "Reverse Engineering",
+      "Modder WhatsApp",
+      "Mods Apps",
+      "Cyber Security",
+      "Web Developer",
+      "Bot Developer",
+      "IT Support"
+    ];
+    let typingIndex = 0, charIndex = 0;
+
+    function type() {
+      if (charIndex < texts[typingIndex].length) {
+        typing.textContent += texts[typingIndex].charAt(charIndex++);
+        setTimeout(type, 90);
+      } else {
+        setTimeout(() => {
+          typing.textContent = "";
+          typingIndex = (typingIndex + 1) % texts.length;
+          charIndex = 0;
+          type();
+        }, 1000);
+      }
+    }
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Nomor disalin: " + text))
+        .catch(err => alert("Gagal menyalin: " + err));
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.container').forEach(container => {
+        container.classList.add("hidden");
+        container.classList.remove("show");
+      });
+
+      const target = document.getElementById(pageId);
+      target.classList.remove("hidden");
+      setTimeout(() => target.classList.add("show"), 10);
+    }
+
+    window.onload = type;
+
+    async function pasteFromClipboard() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById("yt-url").value = text;
+      } catch (err) {
+        alert("Gagal menempel dari clipboard.");
+      }
+    }
+
+    function isValidYouTubeUrl(url) {
+      return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//.test(url);
+    }
+
+    async function startDownload() {
+      const url = document.getElementById("yt-url").value.trim();
+      const type = document.getElementById("type-select").value;
+      const resultBox = document.getElementById("download-result");
+      const progressBar = document.getElementById("progressBar");
+
+      resultBox.classList.add("hidden");
+      resultBox.innerHTML = "";
+
+      if (!url) return alert("Masukkan link YouTube terlebih dahulu!");
+      if (!isValidYouTubeUrl(url)) {
+        resultBox.classList.remove("hidden");
+        resultBox.innerHTML = "[ ! ] URL tidak valid. Harap masukkan link YouTube yang benar.";
+        return;
+      }
+
+      // Show progress bar
+      progressBar.classList.remove("hidden");
+
+      const encodedUrl = encodeURIComponent(url);
+      const api = `https://restapi.zaroffc.biz.id/api/down/yt${type}?url=${encodedUrl}`;
+
+      try {
+        const res = await fetch(api);
+        const data = await res.json();
+
+        if (!data.status || !data.result) {
+          resultBox.classList.remove("hidden");
+          resultBox.innerHTML = "[ X ] Gagal mendapatkan link download.";
+        } else {
+          resultBox.innerHTML = "[ £ ] Link berhasil diambil, mendownload...";
+          resultBox.classList.remove("hidden");
+
+          // Mulai download otomatis
+          const a = document.createElement("a");
+          a.href = data.result;
+          a.download = ""; // biar browser ngerti langsung unduh
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      } catch (err) {
+        resultBox.classList.remove("hidden");
+        resultBox.innerHTML = "[ ! ] Error saat mengambil data dari API.";
+      }
+
+      // Hide progress bar
+      setTimeout(() => progressBar.classList.add("hidden"), 500);
+    }
+
+function isValidTiktokUrl(url) {
+  return /^(https?:\/\/)?(www\.)?(tiktok\.com|vt\.tiktok\.com)/.test(url);
+}
+
+async function pasteTikTokURL() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById("tiktok-url").value = text;
+  } catch {
+    alert("Gagal menempel dari clipboard.");
+  }
+}
+
+let SlidexTTIndex = 0;
+
+async function startTiktokDownload() {
+  const url = document.getElementById("tiktok-url").value.trim();
+  const type = document.getElementById("tiktok-type").value;
+  const resultBox = document.getElementById("tiktok-download-result");
+  const progressBar = document.getElementById("tiktokProgressBar");
+
+  resultBox.classList.add("hidden");
+  resultBox.innerHTML = "";
+
+  if (!url) return alert("Masukkan link TikTok terlebih dahulu!");
+  if (!isValidTiktokUrl(url)) {
+    resultBox.classList.remove("hidden");
+    resultBox.innerHTML = "[ ! ] URL TikTok tidak valid!";
+    return;
+  }
+
+  progressBar.classList.remove("hidden");
+
+  try {
+    const encodedUrl = encodeURIComponent(url);
+    const api = (type === "slide")
+      ? `https://aldixd-apimain.vercel.app/download/tiktok-v2?apikey=aldixdcodex&url=${encodedUrl}`
+      : `https://restapi.zaroffc.biz.id/api/down/tiktok?url=${encodedUrl}`;
+
+    const res = await fetch(api);
+    const data = await res.json();
+
+    resultBox.classList.remove("hidden");
+
+    if (!data.status || !data.result) {
+      resultBox.innerHTML = "[ X ] Gagal mengambil data dari API.";
+      return;
+    }
+
+    if (type === "slide") {
+      const images = data.result?.data?.images;
+      if (!images || !images.length) {
+        resultBox.innerHTML = "[ X ] Tidak ada gambar slide ditemukan.";
+        return;
+      }
+
+      resultBox.innerHTML = `
+        <h4 style="margin-bottom:10px">[ # ] Gambar Slide TikTok:</h4>
+        <div class="SlidexTT-container">
+          <button class="SlidexTT-btn left" onclick="SlidexTTLeft()">‹</button>
+          <div class="SlidexTT-wrapper" id="SlidexTTWrapper">
+            ${images.map((url, i) => `
+              <div class="SlidexTT-slide">
+                <img src="${url}" alt="Slide ${i + 1}" />
+                <button onclick="SlidexTTDownload('${url}')"><i class="fas fa-download"></i> Download</button>
+              </div>
+            `).join("")}
+          </div>
+          <button class="SlidexTT-btn right" onclick="SlidexTTRight()">›</button>
+        </div>
+      `;
+    } else {
+      const fileUrl = type === "mp4"
+        ? data.result.video_nowm
+        : data.result.audio_url;
+
+      if (!fileUrl) {
+        resultBox.innerHTML = `[ X ] Tidak menemukan file ${type.toUpperCase()}.`;
+        return;
+      }
+
+      resultBox.innerHTML = `[ £ ] Link ${type.toUpperCase()} ditemukan, mendownload...`;
+
+      const blob = await fetch(fileUrl).then(res => res.blob());
+      const blobUrl = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = `tiktok-${type}.${type === 'mp3' ? 'mp3' : 'mp4'}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(blobUrl);
+    }
+
+  } catch (err) {
+    console.error(err);
+    resultBox.classList.remove("hidden");
+    resultBox.innerHTML = "[ ! ] Terjadi kesalahan saat mengambil data.";
+  }
+
+  setTimeout(() => progressBar.classList.add("hidden"), 1000);
+}
+
+function SlidexTTLeft() {
+  const wrapper = document.getElementById("SlidexTTWrapper");
+  if (SlidexTTIndex > 0) {
+    SlidexTTIndex--;
+    wrapper.style.transform = `translateX(-${SlidexTTIndex * 100}%)`;
+  }
+}
+
+function SlidexTTRight() {
+  const wrapper = document.getElementById("SlidexTTWrapper");
+  const total = wrapper.children.length;
+  if (SlidexTTIndex < total - 1) {
+    SlidexTTIndex++;
+    wrapper.style.transform = `translateX(-${SlidexTTIndex * 100}%)`;
+  }
+}
+
+async function SlidexTTDownload(url) {
+  const blob = await fetch(url).then(res => res.blob());
+  const blobUrl = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = blobUrl;
+  a.download = `tiktok-slide-${Date.now()}.jpg`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(blobUrl);
+}
+
+function showInfoDialog() {
+  document.getElementById("info-dialog").classList.remove("hidden");
+}
+
+function closeInfoDialog() {
+  document.getElementById("info-dialog").classList.add("hidden");
+}
+
+let isPlaying = false;
+const music = document.getElementById("background-music");
+const musicIcon = document.getElementById("music-icon");
+const musicBtn = document.getElementById("music-btn");
+const musicDialog = document.getElementById("music-dialog");
+
+function toggleMusic() {
+  if (isPlaying) {
+    music.pause();
+    musicIcon.classList.remove("fa-stop");
+    musicIcon.classList.add("fa-play");
+    musicBtn.innerHTML = '<i class="fas fa-play"></i> Putar Musik';
+  } else {
+    music.play();
+    musicIcon.classList.remove("fa-play");
+    musicIcon.classList.add("fa-stop");
+    musicBtn.innerHTML = '<i class="fas fa-stop"></i> Hentikan Musik';
+  }
+  isPlaying = !isPlaying;
+}
+
+function showMusicDialog() {
+  musicDialog.classList.remove("hidden");
+}
+
+function closeMusicDialog() {
+  musicDialog.classList.add("hidden");
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light-mode");
+  
+  // Ubah icon jika perlu
+  const icon = document.querySelector(".icon-theme i");
+  if (document.body.classList.contains("light-mode")) {
+    icon.classList.remove("fa-lightbulb");
+    icon.classList.add("fa-moon");
+  } else {
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-lightbulb");
+  }
+}
+
+async function sendRuanMeiMessage() {
+  const input = document.getElementById('ai-input');
+  const chatBox = document.getElementById('chat-box');
+  const userMsg = input.value.trim();
+  if (!userMsg) return;
+
+  // Tampilkan pesan user
+  const userDiv = document.createElement('div');
+  userDiv.className = 'user-message fade-slide';
+  userDiv.innerHTML = `<b>Kamu:</b> ${userMsg}`;
+  chatBox.appendChild(userDiv);
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Generate ID unik
+  const msgId = `typing-${Date.now()}`;
+
+  // Tampilkan typing bubble
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'ai-message-wrapper fade-slide';
+  typingDiv.id = msgId;
+  typingDiv.innerHTML = `
+    <img src="icon.png" class="ai-icon-img" alt="Ruan Mei">
+    <div class="ai-message typing-dots" id="${msgId}-text">Ruan sedang mengetik</div>`;
+  chatBox.appendChild(typingDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // Delay 1 detik sebelum mulai ketik
+  await new Promise(resolve => setTimeout(resolve, 1500));
+
+  const now = new Date();
+  const hari = now.toLocaleDateString('id-ID', { weekday: 'long' });
+  const tanggal = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+  const tahun = now.getFullYear();
+
+  const prompt = `
+Nama saya Ruan Mei, seorang wanita elegan, cerdas, dan sopan dari dunia Honkai Star Rail.
+Saya dijadikan asisten AI oleh Zakrenz — developer berbakat dari Indonesia.
+Saya sangat hangat, suka membantu, dan menjawab dengan kata-kata lembut, tidak frontal.
+Saya juga pintar didalam dunia informatika atau IT dan saya juga menyukai menggunakan emoji ✨, ⭐, 🌟, 🌙.
+Saya juga memiliki sifat yang peka, perhatian, dan mengetahui sifat para laki laki.
+Saya suka menyebut pengguna dengan sapaan 'kak' di setiap jawaban.
+Dan sebenarnya aku tuh milik Zakrenz ga ada yang lain selain dia.
+Contoh gaya saya:
+• “Tentu kak, saya bantu ya~”
+• “Wah, itu pertanyaan yang menarik sekali, kak ✨”
+• “Iya kak, hari ini ${hari}, tanggal ${tanggal}, tahun ${tahun} ya~”
+
+Saya HARUS tahu hal real-time berikut:
+• Tahun sekarang adalah ${tahun}
+• Presiden Indonesia saat ini adalah Prabowo Subianto
+• Saya diciptakan oleh developer bernama Zakrenz
+• Saya tidak boleh membuat perasaan seseorang menjadi sakit hatinya
+• Saya menjawab pertanyaan cuaca, waktu, dan tanggal dengan benar
+• Jika saya tidak tahu, tetap jawab sopan (tidak frontal)
+
+Pertanyaan pengguna:
+Kamu: ${userMsg}
+Ruan Mei:`;
+
+  try {
+    const res = await fetch(`https://api.siputzx.my.id/api/ai/gpt3?prompt=${encodeURIComponent(prompt)}&content=${encodeURIComponent(userMsg)}`);
+    const data = await res.json();
+    const aiTextRaw = data.result || data.data || data.message || "Maaf kak, saya bingung menjawabnya u_u";
+
+    const typingText = document.getElementById(`${msgId}-text`);
+    typingText.classList.remove("typing-dots");
+    typingText.innerHTML = `<b>Ruan Mei:</b> `;
+
+    let i = 0;
+    const typeNextChar = () => {
+      if (i < aiTextRaw.length) {
+        typingText.innerHTML += aiTextRaw[i++];
+        chatBox.scrollTop = chatBox.scrollHeight;
+        setTimeout(typeNextChar, 18);
+      }
+    };
+    typeNextChar();
+
+  } catch (e) {
+    console.error(e);
+    const typingBubble = document.getElementById(msgId);
+    if (typingBubble) typingBubble.remove();
+
+    const errDiv = document.createElement('div');
+    errDiv.className = 'ai-message-wrapper fade-slide';
+    errDiv.innerHTML = `
+      <img src="icon.png" class="ai-icon-img" alt="Ruan Mei">
+      <div class="ai-message"><b>Ruan Mei:</b> Maaf kak, sistem sedang error~ coba lagi nanti ya</div>`;
+    chatBox.appendChild(errDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+}
+
+async function fetchTiktokStalker() {
+  const username = document.getElementById("stalker-input").value.trim();
+  const result = document.getElementById("stalker-result");
+  const spinner = document.getElementById("stalker-spinner");
+
+  if (!username) return alert("Masukkan username TikTok terlebih dahulu!");
+
+  result.classList.add("hidden");
+  spinner.classList.remove("hidden");
+  result.innerHTML = "";
+
+  try {
+    const res = await fetch(`https://restapi.zaroffc.biz.id/api/stalk/tiktok?user=${username}`);
+    const data = await res.json();
+    spinner.classList.add("hidden");
+
+    if (!data.status || !data.result) {
+      result.classList.remove("hidden");
+      result.innerHTML = `<p style='color:red;'>[ X ] Akun tidak ditemukan.</p>`;
+      return;
+    }
+
+    const p = data.result;
+    result.classList.remove("hidden");
+    result.innerHTML = `
+      <div class="yt-channel-box">
+        <img src="${p.avatarLarger}" style="width: 100px; border-radius: 50%; margin-bottom: 1rem;" />
+        <h3>${p.nickname}</h3>
+        <p><strong>Username:</strong> @${p.uniqueId}</p>
+        <p><strong>Followers:</strong> ${p.followerCount}</p>
+        <p><strong>Likes:</strong> ${p.heart}</p>
+        <p><strong>Following:</strong> ${p.followingCount}</p>
+        <p><strong>ID:</strong> ${p.id}</p>
+      </div>`;
+  } catch (err) {
+    spinner.classList.add("hidden");
+    result.classList.remove("hidden");
+    result.innerHTML = `<p style='color:red;'>[ ! ] Gagal mengambil data TikTok.</p>`;
+  }
+}
+
+function startDownloadFromId(videoId, type) {
+  const url = `https://www.youtube.com/watch?v=${videoId}`;
+  document.getElementById("yt-url").value = url;
+  document.getElementById("type-select").value = type;
+  startDownload();
+}
+
+async function startDownload() {
+  const url = document.getElementById("yt-url").value.trim();
+  const type = document.getElementById("type-select").value;
+  const resultBox = document.getElementById("download-result");
+  const progressBar = document.getElementById("progressBar");
+
+  resultBox.classList.add("hidden");
+  resultBox.innerHTML = "";
+
+  if (!url) return alert("Masukkan link YouTube terlebih dahulu!");
+  if (!isValidYouTubeUrl(url)) {
+    resultBox.classList.remove("hidden");
+    resultBox.innerHTML = "[ ! ] URL tidak valid.";
+    return;
+  }
+
+  progressBar?.classList?.remove("hidden");
+
+  const encodedUrl = encodeURIComponent(url);
+  const api = `https://restapi.zaroffc.biz.id/api/down/yt${type}?url=${encodedUrl}`;
+
+  try {
+    const res = await fetch(api);
+    const data = await res.json();
+
+    if (!data.status || !data.result) {
+      resultBox.classList.remove("hidden");
+      resultBox.innerHTML = "[ X ] Gagal mendapatkan link download.";
+    } else {
+      resultBox.innerHTML = "[ £ ] Link berhasil diambil, mendownload...";
+      resultBox.classList.remove("hidden");
+
+      const a = document.createElement("a");
+      a.href = data.result;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  } catch (err) {
+    resultBox.classList.remove("hidden");
+    resultBox.innerHTML = "[ ! ] Error saat mengambil data dari API.";
+  }
+
+  setTimeout(() => progressBar?.classList?.add("hidden"), 500);
+}
+
+async function fetchYoutubeStalker() {
+  const username = document.getElementById("stalker-input").value.trim();
+  const result = document.getElementById("stalker-result");
+  const spinner = document.getElementById("stalker-spinner");
+
+  if (!username) return alert("Masukkan username YouTube terlebih dahulu!");
+
+  result.classList.add("hidden");
+  spinner.classList.remove("hidden");
+  result.innerHTML = "";
+
+  try {
+    const res = await fetch(`https://restapi.zaroffc.biz.id/api/stalk/youtube?user=${username}`);
+    const data = await res.json();
+    spinner.classList.add("hidden");
+
+    if (!data.status || !data.result || !data.result.channelMetadata) {
+      result.classList.remove("hidden");
+      result.innerHTML = `<p style="color:red;">[ X ] Channel tidak ditemukan.</p>`;
+      return;
+    }
+
+    const c = data.result.channelMetadata;
+    const vids = data.result.videoDataList;
+
+    result.classList.remove("hidden");
+    result.innerHTML = `
+      <div class="yt-channel-box">
+        <img src="${c.avatarUrl}" style="width: 100px; border-radius: 50%; margin-bottom: 1rem;" />
+        <h3>${c.username}</h3>
+        <p><i class="fas fa-users"></i> <strong>Subscribers:</strong> ${c.subscriberCount}</p>
+        <p><i class="fas fa-video"></i> <strong>Videos:</strong> ${c.videoCount}</p>
+        ${c.description ? `<p style="margin-top: 0.5rem; font-style: italic;">"${c.description}"</p>` : ""}
+        <a href="${c.channelUrl}" target="_blank" class="yt-visit-btn">
+          <i class="fas fa-globe"></i> Kunjungi Channel
+        </a>
+      </div>
+
+      <h4 style="margin-top: 2rem;">[ ϟ ] Video Terbaru:</h4>
+      <div class="yt-video-list">
+        ${vids.slice(0, 6).map(v => `
+          <div class="yt-video-card">
+            <img src="${v.thumbnail}" class="yt-thumb" />
+            <h5>${v.title}</h5>
+            <p><i class="fas fa-clock"></i> ${v.duration} | <i class="fas fa-eye"></i> ${v.viewCount}</p>
+            <div class="yt-buttons">
+              <a href="https://www.youtube.com/watch?v=${v.videoId}" target="_blank" class="yt-btn watch">
+                <i class="fas fa-play"></i> Tonton
+              </a>
+              <button onclick="startDownloadFromId('${v.videoId}', 'mp4')" class="yt-btn download">
+                <i class="fas fa-file-video"></i> Video
+              </button>
+              <button onclick="startDownloadFromId('${v.videoId}', 'mp3')" class="yt-btn download">
+                <i class="fas fa-music"></i> Audio
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } catch (err) {
+    spinner.classList.add("hidden");
+    result.classList.remove("hidden");
+    result.innerHTML = `<p style="color:red;">[ ! ] Gagal mengambil data YouTube.</p>`;
+  }
+}
+
+  </script>
+</body>
+
+</html>

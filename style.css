@@ -1,0 +1,1196 @@
+:root {
+--glow-hue: 270;
+--shadow-hue: 0;
+--spring-duration: 0.25s;
+--spring-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GLOBAL */
+body {
+font-family: 'Inter', sans-serif;
+background: linear-gradient(to bottom, #202020, #020202);
+color: #fff;
+min-height: 100vh;
+padding: 2rem 1rem;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+}
+
+body.light-mode {
+  background: linear-gradient(to bottom, #ffffff, #eaeaea);
+  color: #121212;
+}
+
+body.light-mode .container,
+body.light-mode .downloader-box,
+body.light-mode .dialog-content {
+  background: rgba(255, 255, 255, 0.95);
+  color: #121212;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode input,
+body.light-mode select {
+  background: #f5f5f5;
+  color: #222;
+  border: 1px solid #ccc;
+}
+
+body.light-mode button,
+body.light-mode .btn {
+  background: linear-gradient(45deg, #eee, #ccc);
+  color: #222;
+}
+
+body.light-mode .info-button {
+  background: #ddd;
+  color: #111;
+}
+
+body.light-mode .download-result {
+  background: #f1f1f1;
+  color: #222;
+  border-left-color: #00c2ff;
+}
+
+.hidden {
+display: none;
+}
+
+/* CONTAINER */
+.container {
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(255, 255, 255, 0.1);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+backdrop-filter: blur(15px);
+padding: 2rem;
+border-radius: 20px;
+max-width: 420px;
+width: 100%;
+text-align: center;
+opacity: 0;
+animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+0% { opacity: 0; transform: translateY(30px); }
+100% { opacity: 1; transform: translateY(0); }
+}
+
+/* PROFILE */
+.profile-container {
+position: relative;
+display: inline-block;
+margin-bottom: 1.5rem;
+}
+
+.profile-img {
+width: 120px;
+height: 120px;
+border: 4px solid rgba(255, 255, 255, 0.1);
+border-radius: 50%;
+object-fit: cover;
+box-shadow: 0 0 14px rgba(255, 255, 255, 0.15);
+position: relative;
+z-index: 2;
+}
+
+/* TEXT & TITLE */
+h1 {
+font-size: 1.9rem;
+font-weight: 700;
+margin-bottom: 0.5rem;
+}
+
+.typing-text {
+font-size: 1rem;
+color: #e0e0e0;
+margin-bottom: 1.5rem;
+min-height: 1.5rem;
+}
+
+.section-title {
+font-size: 1.2rem;
+font-weight: 600;
+color: #ddd;
+margin: 1.6rem 0 0.4rem;
+}
+
+.section-content {
+font-size: 0.95rem;
+color: #ccc;
+margin-bottom: 1rem;
+}
+
+.footer {
+margin-top: 2rem;
+font-size: 0.8rem;
+color: #ccc;
+}
+
+/* BUTTON STYLE */
+button,
+.btn,
+.next-button,
+.back-button {
+color: #C7C8CA;
+font-weight: 600;
+background: linear-gradient(45deg, #3b3b3b, #1f1f1f, #000000, #1a1a1a);
+background-size: 200% 200%;
+animation: gradientBtn 5s ease infinite;
+padding: 0.8rem 1.5rem;
+border: none;
+border-radius: 10px;
+margin-top: 1rem;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+transition: all 0.3s ease;
+display: inline-block;
+}
+
+button:hover,
+.btn:hover,
+.next-button:hover,
+.back-button:hover {
+transform: scale(1.05);
+box-shadow: 0 0 12px rgba(255, 255, 255, 0.2),
+inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+@keyframes gradientBtn {
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
+}
+
+/* CODE PREVIEW & SLIDER */
+.code-slider {
+position: relative;
+text-align: center;
+margin-bottom: 1.5rem;
+}
+
+.code-preview {
+background: rgba(0, 0, 0, 0.3);
+border: 1px solid rgba(255, 255, 255, 0.1);
+border-radius: 10px;
+padding: 1rem;
+font-family: monospace;
+font-size: 0.85rem;
+color: #a5f3fc;
+min-height: 120px;
+overflow-x: auto;
+transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.code-preview.slide-left { transform: translateX(-20%); opacity: 0; }
+.code-preview.slide-right { transform: translateX(20%); opacity: 0; }
+
+.code-buttons {
+display: flex;
+justify-content: center;
+gap: 1rem;
+margin-top: 1rem;
+}
+
+.code-buttons button {
+background: #1e1e1e;
+border: 1px solid rgba(255, 255, 255, 0.1);
+padding: 0.5rem 1rem;
+border-radius: 8px;
+color: #aaa;
+font-size: 1.2rem;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.code-buttons button:hover {
+background: rgba(255, 255, 255, 0.1);
+color: #fff;
+}
+
+/* LINK STYLE */
+.LinksX {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 0.6rem;
+}
+
+.LinksX a {
+flex: 1 1 calc(25% - 0.6rem);
+max-width: calc(25% - 0.6rem);
+font-size: 0.72rem;
+font-weight: 600;
+padding: 0.5rem;
+text-align: center;
+text-decoration: none;
+color: #CACACA;
+border-radius: 10px;
+background: linear-gradient(45deg, #303030, #1C1C1C, #101010, #1b1b1b);
+background-size: 200% 200%;
+animation: gradientBtn 5s ease infinite;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+transition: 0.3s ease;
+}
+
+.LinksX a i {
+font-size: 0.95rem;
+margin: 0;
+}
+
+.LinksX a.full-width {
+flex: 1 1 100%;
+max-width: 100%;
+}
+
+@media (max-width: 420px) {
+.LinksX a {
+flex: 1 1 calc(48% - 0.6rem);
+max-width: calc(48% - 0.6rem);
+font-size: 0.7rem;
+}
+
+.LinksX a i {
+font-size: 0.9rem;
+}
+}
+
+/* SPINNER - DOTS */
+.spinner-ring {
+margin: 1.2rem auto 1.4rem;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 0.4rem;
+}
+
+.spinner-ring span {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background-color: #fff;
+animation: bounce 1s infinite ease-in-out;
+}
+
+.spinner-ring span:nth-child(1) { animation-delay: 0s; background: #FFFFFF; }
+.spinner-ring span:nth-child(2) { animation-delay: 0.2s; background: #B5B5B5; }
+.spinner-ring span:nth-child(3) { animation-delay: 0.4s; background: #595B5C; }
+.spinner-ring span:nth-child(4) { animation-delay: 0.4s; background: #828282; }
+
+@keyframes bounce {
+  0%, 60%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* SPINNER AROUND PROFILE */
+.spinner-wrapper {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 140px;
+height: 140px;
+transform: translate(-50%, -50%);
+z-index: 1;
+pointer-events: none;
+}
+
+.spinner-circle {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+border: 4px solid transparent;
+border-top: 4px solid #A0A0A0;
+border-left: 4px solid #A1A1A1;
+border-right: 4px solid #A2A2A2;
+animation: spin 1.5s linear infinite;
+box-sizing: border-box;
+}
+
+@keyframes spin {
+0% { transform: rotate(0); }
+100% { transform: rotate(360deg); }
+}
+
+/* ICON LIST */
+.icons li {
+list-style: none;
+}
+
+.icons li a {
+font-size: 1.3rem;
+color: #fff;
+background: rgba(255, 255, 255, 0.1);
+padding: 0.5rem;
+margin: 0.3rem;
+border-radius: 50%;
+display: inline-block;
+transition: all 0.3s ease;
+}
+
+.icons li a:hover {
+background: rgba(255, 255, 255, 0.25);
+transform: scale(1.2);
+}
+
+/* DOWNLOADER */
+.downloader-box {
+display: flex;
+flex-direction: column;
+gap: 0.7rem;
+margin-top: 1rem;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.1);
+padding: 1rem;
+border-radius: 12px;
+}
+
+.downloader-box input,
+.downloader-box select {
+padding: 0.6rem;
+font-size: 0.9rem;
+color: #ddd;
+background: #121212;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 8px;
+outline: none;
+}
+
+.downloader-box button {
+font-weight: 600;
+background: linear-gradient(45deg, #3b3b3b, #1f1f1f, #000000);
+color: #C7C8CA;
+border: none;
+padding: 0.7rem;
+border-radius: 8px;
+cursor: pointer;
+transition: 0.3s ease;
+}
+
+.downloader-box button:hover {
+background: #2a2a2a;
+transform: scale(1.03);
+}
+
+.download-result {
+word-break: break-word;
+background: #1a1a1a;
+border-left: 4px solid #AAAAAA;
+color: #BBBBBB;
+padding: 0.6rem;
+font-size: 0.85rem;
+border-radius: 8px;
+}
+
+.url-input-group {
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.url-input-group input {
+flex: 1;
+}
+
+.url-input-wrapper {
+position: relative;
+width: 100%;
+}
+
+.url-input-wrapper {
+position: relative;
+width: 100%;
+}
+
+.url-input-wrapper input {
+width: 100%;
+padding: 0.6rem 2.7rem 0.6rem 0.8rem; /* kanan disisakan ruang buat tombol */
+font-size: 0.9rem;
+color: #ddd;
+background: #121212;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 8px;
+outline: none;
+}
+
+.paste-inside {
+position: absolute;
+top: 50%;
+right: 0.5rem;
+transform: translateY(-50%);
+background: #1f1f1f;
+border: none;
+color: #ccc;
+padding: 0.5rem 0.6rem;
+border-radius: 6px;
+font-size: 1rem;
+cursor: pointer;
+transition: 0.2s ease;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.paste-inside:hover {
+background: #2c2c2c;
+color: #fff;
+}
+
+.yt-input-group {
+display: flex;
+gap: 0.5rem;
+}
+
+.yt-input-group input {
+flex: 1;
+padding: 0.6rem;
+font-size: 0.9rem;
+color: #ddd;
+background: #121212;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 8px;
+outline: none;
+}
+.progress-bar {
+height: 6px;
+width: 100%;
+background: linear-gradient(90deg, #101010, #A0A0A0, #EEEEEE);
+background-size: 200% 100%;
+border-radius: 6px;
+margin: 0.7rem 0;
+animation: progressSlide 1.4s linear infinite;
+}
+
+@keyframes progressSlide {
+0% { background-position: 0% 50%; }
+100% { background-position: 100% 50%; }
+}
+
+/* Info Button Icon */
+.info-button {
+position: fixed;
+top: 1.2rem;
+left: 1.2rem;
+background: #222;
+color: #fff;
+font-size: 1rem;
+width: 34px;
+height: 34px;
+border-radius: 50%;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+cursor: pointer;
+transition: transform 0.2s ease;
+}
+
+.info-button:active {
+transform: scale(0.93);
+}
+
+.info-button i {
+font-size: 1.1rem;
+}
+
+/* Music icon override position */
+.icon-music {
+  position: fixed;
+  top: 1.2rem;
+  left: 4.2rem; /* sejajar dengan info-button tapi agak ke kanan */
+}
+
+/* Dialog Overlay */
+.dialog-box {
+position: fixed;
+inset: 0;
+background: rgba(10, 10, 10, 0.5);
+backdrop-filter: blur(5px);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 999;
+transition: opacity 0.4s ease;
+}
+
+.dialog-box.hidden {
+display: none;
+}
+
+/* Modal Box */
+.dialog-content {
+background: #1e1e1e;
+color: #fff;
+padding: 1.5rem 1.8rem;
+border-radius: 14px;
+width: 90%;
+max-width: 360px;
+box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+animation: slideUp 0.4s ease;
+}
+
+.dialog-content h3 {
+margin-top: 0;
+font-size: 1.2rem;
+margin-bottom: 0.8rem;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.dialog-content ul {
+padding-left: 1.2rem;
+margin: 0.6rem 0;
+font-size: 0.95rem;
+line-height: 1.5;
+}
+
+.dialog-content button {
+margin-top: 1.4rem;
+padding: 0.5rem 1.2rem;
+background: #2a2a2a;
+color: #eee;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+font-weight: 600;
+transition: background 0.3s;
+}
+
+.dialog-content button:hover {
+background: #3a3a3a;
+}
+
+/* Slide Animation */
+@keyframes slideUp {
+from {
+transform: translateY(60px);
+opacity: 0;
+}
+to {
+transform: translateY(0);
+opacity: 1;
+}
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 1.4rem 0.6rem;
+  }
+
+  .container {
+    padding: 1.4rem 1rem;
+    border-radius: 14px;
+  }
+
+  .downloader-box {
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .downloader-box input,
+  .downloader-box select {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .downloader-box button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .dialog-content {
+    padding: 1.2rem 1rem;
+  }
+}
+
+.url-input-wrapper input {
+  margin-bottom: 0.4rem;
+}
+
+.url-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.downloader-box + .downloader-box {
+  margin-top: 1.5rem;
+}
+
+.back-button i {
+  margin-right: 6px;
+  font-size: 0.95rem;
+}
+
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.6s ease;
+}
+
+.zakrenzicon img {
+      width: 210px;
+      border-radius: 14px;
+      margin: 30px auto;
+      transition: transform 0.3s ease;
+    }
+
+    .zakrenzicon:hover img { transform: scale(1.08); }
+
+/* Musik Dialog */
+.music-dialog {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  z-index: 1001;
+  padding: 1.2rem;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.4s ease;
+}
+
+.music-dialog.hidden {
+  display: none;
+}
+
+.music-dialog .dialog-content {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.music-btn {
+  background: #1f1f1f;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.music-btn:hover {
+  background: #2c2c2c;
+}
+
+.icon-theme {
+  position: fixed;
+  top: 4.2rem; /* di bawah music, jarak kira-kira 3.6rem dari atas */
+  left: 1.2rem; /* sejajar horizontal sama info-button */
+}
+
+/* AI Icon Positioning */
+.icon-ai {
+  position: fixed;
+  top: 7.2rem; /* Bawahnya icon theme */
+  left: 1.2rem;
+}
+
+/* Chat Box */
+.chat-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  height: 260px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* User Message */
+.user-message {
+  align-self: flex-end;
+  background: #333;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  color: #eee;
+  width: fit-content;
+  max-width: 90%;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* AI Message Wrapper */
+.ai-message-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+/* Ruan Mei Icon */
+.ai-icon-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 3px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+/* AI Bubble */
+.ai-message {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  line-height: 1.5;
+  color: #eee;
+  width: fit-content;
+  max-width: 88%;
+  font-size: 1rem;
+}
+
+/* Chat Input Group */
+.chat-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chat-input-group {
+  display: flex;
+  align-items: center; /* Penting untuk vertical-align */
+  gap: 0.5rem;
+}
+
+/* Input Box */
+.chat-input-group input {
+  height: 48px;
+  width: 100%;
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  color: #ddd;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box; /* Penting agar height tetap konsisten */
+  line-height: 1.2;        /* Tambahan biar teks center */
+  display: flex;
+  align-items: center;
+}
+
+/* Kirim Button */
+.chat-input-group button {
+  height: 48px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  border: none;
+  background: #444;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.15s ease;
+}
+
+.chat-input-group button:hover {
+  background: #666;
+  transform: scale(1.05);
+}
+
+.chat-input-group button:active {
+  transform: scale(0.97);
+}
+
+.chat-input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.chat-input-wrapper input {
+  width: 100%;
+  height: 48px;
+  padding: 0 3rem 0 1rem; /* kanan dikasih ruang buat tombol */
+  font-size: 0.95rem;
+  color: #ddd;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-input-wrapper button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: #444;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-wrapper button:hover {
+  background: #666;
+}
+
+.chat-input-wrapper2 {
+  position: relative;
+  width: 100%;
+  margin-top: 0.0rem;
+}
+
+.chat-input-wrapper2 input {
+  width: 100%;
+  height: 48px;
+  padding: 0 3rem 0 1rem; /* kanan dikasih ruang buat tombol */
+  font-size: 0.95rem;
+  color: #ddd;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-input-wrapper2 button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: #444;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-wrapper2 button:hover {
+  background: #666;
+}
+
+.chat-input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.chat-input-wrapper input {
+  width: 100%;
+  height: 48px;
+  padding: 0 3rem 0 1rem; /* kanan dikasih ruang buat tombol */
+  font-size: 0.95rem;
+  color: #ddd;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-input-wrapper button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: #444;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-wrapper button:hover {
+  background: #666;
+}
+
+.chat-input-xx1 {
+  position: relative;
+  width: 100%;
+  margin-top: 0.0rem;
+}
+
+.chat-input-xx1 input {
+  width: 100%;
+  height: 48px;
+  padding: 0 3rem 0 1rem; /* kanan dikasih ruang buat tombol */
+  font-size: 0.95rem;
+  color: #ddd;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-input-xx1 button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: #444;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-xx1 button:hover {
+  background: #666;
+}
+
+/* Animasi slide masuk */
+.fade-slide {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(2px);
+  animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Efek titik-titik mengetik */
+@keyframes dots {
+  0%   { content: ""; }
+  33%  { content: "."; }
+  66%  { content: ".."; }
+  100% { content: "..."; }
+}
+
+.typing-dots::after {
+  content: "";
+  animation: dots 1s steps(3, end) infinite;
+  margin-left: 4px;
+}
+
+.tiktok-download-result img {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.tiktok-download-result img:hover {
+  transform: scale(1.03);
+}
+
+.SlidexTT-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.SlidexTT-wrapper {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.SlidexTT-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  background: #111;
+  text-align: center;
+}
+
+.SlidexTT-slide img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.SlidexTT-slide button {
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  color: #C7C8CA;
+  background: linear-gradient(45deg, #3b3b3b, #1f1f1f, #000000);
+background-size: 200% 200%;
+animation: gradientBtn 5s ease infinite;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.SlidexTT-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.SlidexTT-btn.left {
+  left: 5px;
+}
+
+.SlidexTT-btn.right {
+  right: 5px;
+}
+
+.yt-video-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.yt-video-card {
+  background: #111;
+  border-radius: 10px;
+  padding: 0.8rem;
+  box-shadow: 0 0 4px rgba(255,255,255,0.1);
+}
+
+.yt-video-card h5 {
+  font-size: 1rem;
+  margin: 0.6rem 0 0.4rem;
+}
+
+.yt-video-card p {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.yt-buttons {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+}
+.yt-btn {
+  margin: 0.3rem 0.4rem 0;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 5.5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: #fff;
+  background: #444;
+  transition: background 0.2s;
+}
+
+.yt-btn:hover {
+  background: #666;
+}
+
+.yt-btn.download { background: #2c3e50; }
+.yt-btn.watch { background: #2980b9; }
+
+.yt-visit-btn {
+  margin-top: 0.8rem;
+  display: inline-block;
+  background: #333;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  color: #ddd;
+  text-decoration: none;
+}
+
+.yt-visit-btn:hover {
+  background: #555;
+}
+
+.yt-thumb {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
+}
+
+/* TAMPILAN RESPONSIVE UNTUK LAPTOP / PC */
+@media (min-width: 768px) {
+  body {
+    padding: 4rem;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1b1b1b, #121212);
+  }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, #202020, #020202); no-repeat center center/cover;
+  opacity: 0.08;
+  z-index: -1;
+}
