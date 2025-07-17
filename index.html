@@ -357,7 +357,7 @@
       progressBar.classList.remove("hidden");
 
       const encodedUrl = encodeURIComponent(url);
-      const api = `https://restapi.zaroffc.biz.id/api/down/yt${type}?url=${encodedUrl}`;
+      const api = `https://api.zaroffc.xyz/api/down/yt${type}?url=${encodedUrl}`;
 
       try {
         const res = await fetch(api);
@@ -424,7 +424,7 @@ async function startTiktokDownload() {
     const encodedUrl = encodeURIComponent(url);
     const api = (type === "slide")
       ? `https://aldixd-apimain.vercel.app/download/tiktok-v2?apikey=aldixdcodex&url=${encodedUrl}`
-      : `https://restapi.zaroffc.biz.id/api/down/tiktok?url=${encodedUrl}`;
+      : `https://api.zaroffc.xyz/api/down/tiktok?url=${encodedUrl}`;
 
     const res = await fetch(api);
     const data = await res.json();
@@ -680,7 +680,7 @@ async function fetchTiktokStalker() {
   result.innerHTML = "";
 
   try {
-    const res = await fetch(`https://restapi.zaroffc.biz.id/api/stalk/tiktok?user=${username}`);
+    const res = await fetch(`https://api.zaroffc.xyz/api/stalk/tiktok?user=${username}`);
     const data = await res.json();
     spinner.classList.add("hidden");
 
@@ -735,7 +735,7 @@ async function startDownload() {
   progressBar?.classList?.remove("hidden");
 
   const encodedUrl = encodeURIComponent(url);
-  const api = `https://restapi.zaroffc.biz.id/api/down/yt${type}?url=${encodedUrl}`;
+  const api = `https://api.zaroffc.xyz/api/down/yt${type}?url=${encodedUrl}`;
 
   try {
     const res = await fetch(api);
@@ -775,7 +775,7 @@ async function fetchYoutubeStalker() {
   result.innerHTML = "";
 
   try {
-    const res = await fetch(`https://restapi.zaroffc.biz.id/api/stalk/youtube?user=${username}`);
+    const res = await fetch(`https://api.zaroffc.xyz/api/stalk/youtube?user=${username}`);
     const data = await res.json();
     spinner.classList.add("hidden");
 
